@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillGap AI — Resume Analyzer & Skill Gap Finder</title>
+    <meta name="description"
+        content="Upload your resume, select a target role, and get AI-driven skill gap analysis with actionable career recommendations.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        surface: { primary: '#0B1120', secondary: '#0F172A' },
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="min-h-screen">
+
+    <!-- Atmospheric Background -->
+    <div class="bg-atmosphere"></div>
+    <div class="grid-pattern"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="nav-glass sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="logo-icon p-2 rounded-xl text-white shadow-lg shadow-purple-900/30">
+                    <i data-lucide="brain" size="20"></i>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-white">
+                    AI Resume <span class="gradient-text">Analyzer</span>
+                </span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#hero-section" class="text-sm text-[#94A3B8] hover:text-white transition-colors">Home</a>
+                <a href="#input-section" class="text-sm text-[#94A3B8] hover:text-white transition-colors">Analyze</a>
+                <a href="#footer" class="text-sm text-[#94A3B8] hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="mobile-menu-btn"
+                    class="hamburger-btn items-center justify-center p-2 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/5 transition-all focus:outline-none">
+                    <i data-lucide="menu" size="22"></i>
+                </button>
+                <button id="theme-toggle"
+                    class="p-2.5 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/5 transition-all focus:outline-none"
+                    style="display:none;">
+                    <i data-lucide="moon" class="dark:hidden"></i>
+                    <i data-lucide="sun" class="hidden dark:block"></i>
+                </button>
+                <a href="#input-section"
+                    class="btn-primary px-5 py-2 text-white text-sm font-semibold rounded-[10px] flex items-center space-x-2 no-underline">
+                    <span>Get Started</span>
+                    <i data-lucide="arrow-right" size="16"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu flex-col space-y-3 md:hidden">
+            <a href="#hero-section" class="text-sm text-[#94A3B8] hover:text-white transition-colors py-2"
+                onclick="closeMobileMenu()">Home</a>
+            <a href="#input-section" class="text-sm text-[#94A3B8] hover:text-white transition-colors py-2"
+                onclick="closeMobileMenu()">Analyze</a>
+            <a href="#footer" class="text-sm text-[#94A3B8] hover:text-white transition-colors py-2"
+                onclick="closeMobileMenu()">Contact</a>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6">
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section id="hero-section" class="hero-section-wrap py-16 md:py-[120px] pb-16">
+            <div class="glass rounded-[24px] p-8 md:p-14" style="box-shadow: 0 10px 40px rgba(0,0,0,0.35);">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                    <!-- Left: Text -->
+                    <div class="flex-1 space-y-6 text-center lg:text-left">
+                        <div class="animate-in">
+                            <span
+                                class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-[#A78BFA] border border-[rgba(124,58,237,0.25)] bg-[rgba(124,58,237,0.08)]">
+                                <i data-lucide="sparkles" class="mr-1.5 w-3.5 h-3.5"></i>
+                                AI-Powered Career Intelligence
+                            </span>
+                        </div>
+                        <h1
+                            class="animate-in delay-1 text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-bold text-white tracking-tight leading-[1.15]">
+                            AI Resume Intelligence<br>for <span class="gradient-text">Modern Developers</span>
+                        </h1>
+                        <p class="animate-in delay-2 text-base md:text-lg text-[#94A3B8] max-w-xl leading-relaxed">
+                            Analyze your resume, discover skill gaps, and receive personalized learning paths powered by
+                            AI.
+                        </p>
+                        <div
+                            class="animate-in delay-3 flex flex-col sm:flex-row items-center gap-4 lg:justify-start justify-center">
+                            <a href="#input-section"
+                                class="btn-primary px-8 py-3.5 text-white font-semibold rounded-[10px] flex items-center space-x-2.5 text-base no-underline">
+                                <span>Analyze My Resume</span>
+                                <i data-lucide="arrow-right" size="18"></i>
+                            </a>
+                            <a href="#footer"
+                                class="btn-secondary px-6 py-3.5 text-[#94A3B8] font-semibold rounded-[10px] flex items-center space-x-2 text-sm no-underline">
+                                <span>Learn More</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: AI Graphic -->
+                    <div class="flex-1 flex justify-center animate-in delay-4">
+                        <div class="hero-graphic">
+                            <div class="hero-graphic-inner">
+                                <div class="hero-ring hero-ring-1"></div>
+                                <div class="hero-ring hero-ring-2"></div>
+                                <div class="hero-ring hero-ring-3"></div>
+                                <div class="hero-dot hero-dot-1"></div>
+                                <div class="hero-dot hero-dot-2"></div>
+                                <div class="hero-dot hero-dot-3"></div>
+                                <div class="hero-center-icon">
+                                    <i data-lucide="brain" class="text-[#7C3AED]" size="48"></i>
+                                </div>
+                                <!-- Floating mini cards — radial layout -->
+                                <div class="hero-float-card hero-float-card-1 hidden md:flex items-center space-x-2">
+                                    <div class="w-2.5 h-2.5 rounded-full"
+                                        style="background:#10B981;box-shadow:0 0 8px rgba(16,185,129,0.5)"></div>
+                                    <span class="text-xs font-semibold" style="color:#10B981">Skills Matched</span>
+                                </div>
+                                <div class="hero-float-card hero-float-card-2 hidden md:flex items-center space-x-2">
+                                    <div class="w-2.5 h-2.5 rounded-full"
+                                        style="background:#8B5CF6;box-shadow:0 0 8px rgba(139,92,246,0.5)"></div>
+                                    <span class="text-xs font-semibold" style="color:#8B5CF6">AI Analysis</span>
+                                </div>
+                                <div class="hero-float-card hero-float-card-3 hidden md:flex items-center space-x-2">
+                                    <div class="w-2.5 h-2.5 rounded-full"
+                                        style="background:#38BDF8;box-shadow:0 0 8px rgba(56,189,248,0.5)"></div>
+                                    <span class="text-xs font-semibold" style="color:#38BDF8">Learning Path</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== RESUME UPLOAD SECTION ==================== -->
+        <section id="input-section" class="max-w-2xl mx-auto pb-[120px] animate-in delay-3">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">Upload Your Resume</h2>
+                <p class="text-[#94A3B8] text-sm">Select your target role and upload your PDF to get started</p>
+            </div>
+            <div class="glass-card overflow-hidden" style="border-radius:24px;">
+                <div class="p-8 md:p-10 space-y-8">
+                    <!-- Role Selection -->
+                    <div>
+                        <label class="block text-sm font-semibold text-[#E5E7EB] mb-2.5 tracking-wide">
+                            <i data-lucide="briefcase" class="inline-block w-4 h-4 mr-1.5 -mt-0.5 text-[#7C3AED]"></i>
+                            Target Career Role
+                        </label>
+                        <div class="relative">
+                            <select id="role-select"
+                                class="select-premium w-full pl-4 pr-12 py-4 border border-[rgba(255,255,255,0.08)] text-[#E5E7EB] rounded-[10px] focus:ring-2 focus:ring-[rgba(124,58,237,0.4)] appearance-none outline-none cursor-pointer text-sm font-medium">
+                                <option value="" disabled selected>Select a role</option>
+                                <option value="backend">Backend Developer</option>
+                                <option value="frontend">Frontend Developer</option>
+                                <option value="fullstack">Fullstack Developer</option>
+                                <option value="data_science">Data Scientist</option>
+                                <option value="devops">DevOps Engineer</option>
+                            </select>
+                            <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                                <i data-lucide="chevron-down" class="text-[#94A3B8] w-5 h-5"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Area -->
+                    <div id="drop-zone" class="upload-zone group p-10 md:p-14 text-center cursor-pointer">
+                        <input type="file" id="resume-upload" class="hidden" accept=".pdf" />
+                        <div class="flex flex-col items-center">
+                            <div id="upload-icon-container"
+                                class="icon-wrap p-5 rounded-2xl mb-5 bg-[rgba(124,58,237,0.1)] text-[#94A3B8]">
+                                <i data-lucide="upload" id="main-icon" size="36"></i>
+                            </div>
+                            <h3 id="file-name-display" class="text-lg font-bold text-white">Drag & Drop Resume</h3>
+                            <p id="file-size-display" class="text-[#94A3B8] text-sm mt-1.5">or Upload PDF</p>
+                        </div>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="error-message"
+                        class="hidden flex items-center space-x-3 text-rose-400 bg-rose-900/20 p-4 rounded-[10px] text-sm border border-rose-800/30 backdrop-blur-sm">
+                        <i data-lucide="alert-circle" size="18"></i>
+                        <span id="error-text"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button id="analyze-btn" disabled
+                        class="btn-primary w-full py-4 text-white font-bold rounded-[10px] flex items-center justify-center space-x-2.5 cursor-pointer disabled:cursor-not-allowed text-base">
+                        <span>Analyze Resume</span>
+                        <i data-lucide="arrow-right" size="20"></i>
+                    </button>
+                </div>
+                <div class="px-8 py-4 border-t border-[rgba(255,255,255,0.06)]"
+                    style="background:rgba(255,255,255,0.02);">
+                    <p class="text-[10px] text-center text-[#475569] uppercase tracking-[0.25em] font-bold">
+                        Privacy Guaranteed &bull; AI Driven &bull; PDF Only
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LOADING STATE ==================== -->
+        <div id="loader" class="hidden flex flex-col items-center justify-center py-[120px] space-y-8">
+            <div class="relative">
+                <div class="spinner-ring w-20 h-20 rounded-full"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i data-lucide="brain" class="text-[#7C3AED]" size="28"></i>
+                </div>
+            </div>
+            <div class="text-center space-y-3">
+                <h3 class="text-xl font-bold text-white">Analyzing Resume<span class="loading-dots"></span></h3>
+                <p class="text-[#94A3B8] text-sm max-w-xs mx-auto">Our AI is extracting skills and calculating gaps.</p>
+                <div class="flex items-center justify-center space-x-6 pt-4">
+                    <div
+                        class="progress-step active flex items-center space-x-1.5 text-xs font-semibold text-[#7C3AED]">
+                        <i data-lucide="upload-cloud" class="w-3.5 h-3.5"></i><span>Uploading</span>
+                    </div>
+                    <div class="w-6 h-px bg-[rgba(255,255,255,0.08)]"></div>
+                    <div class="progress-step flex items-center space-x-1.5 text-xs font-semibold text-[#475569]">
+                        <i data-lucide="file-scan" class="w-3.5 h-3.5"></i><span>Parsing</span>
+                    </div>
+                    <div class="w-6 h-px bg-[rgba(255,255,255,0.08)]"></div>
+                    <div class="progress-step flex items-center space-x-1.5 text-xs font-semibold text-[#475569]">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i><span>Analyzing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== RESULTS DASHBOARD ==================== -->
+        <div id="results-dashboard" class="hidden py-[120px] pt-16 space-y-[48px]">
+
+            <!-- Analysis Dashboard: Stats -->
+            <div>
+                <div class="flex items-center space-x-3 mb-8 animate-in">
+                    <div class="w-1 h-6 rounded-full bg-gradient-to-b from-[#7C3AED] to-[#22D3EE]"></div>
+                    <h2 class="text-2xl font-bold text-white">Analysis Dashboard</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-6 flex items-center space-x-4 animate-in">
+                        <div class="stat-icon-indigo p-3.5 rounded-xl text-[#A78BFA]">
+                            <i data-lucide="award" size="24"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-1">ATS Match Score
+                            </p>
+                            <p id="stat-score" class="text-3xl font-bold text-white">0%</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 flex items-center space-x-4 animate-in delay-1">
+                        <div class="stat-icon-emerald p-3.5 rounded-xl text-emerald-400">
+                            <i data-lucide="check-circle-2" size="24"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-1">Matched Skills
+                            </p>
+                            <p id="stat-matched" class="text-3xl font-bold text-white">0</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 flex items-center space-x-4 animate-in delay-2">
+                        <div class="stat-icon-rose p-3.5 rounded-xl text-rose-400">
+                            <i data-lucide="x-circle" size="24"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-1">Skill Gaps</p>
+                            <p id="stat-missing" class="text-3xl font-bold text-white">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Feedback + AI Insight -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Expert Feedback -->
+                    <div class="glass-card p-8 md:p-10 animate-in delay-3" style="border-radius:24px;">
+                        <div class="flex items-center space-x-3 mb-5">
+                            <div class="p-2 rounded-lg bg-[rgba(124,58,237,0.15)]">
+                                <i data-lucide="message-square" class="text-[#A78BFA] w-5 h-5"></i>
+                            </div>
+                            <h2 class="text-xl font-bold text-white">Expert Feedback</h2>
+                            <span id="rating-badge"
+                                class="badge-gradient px-3 py-1 text-[#C4B5FD] text-xs font-bold rounded-full">Good</span>
+                        </div>
+                        <p id="career-feedback-text" class="text-[#94A3B8] leading-relaxed text-base"></p>
+                    </div>
+
+                    <!-- Skill Gap Insights: Matched & Missing -->
+                    <div class="glass-card overflow-hidden animate-in delay-4" style="border-radius:24px;">
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[rgba(255,255,255,0.06)]">
+                            <div class="p-8">
+                                <div class="flex items-center space-x-2 mb-6">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                                    <h3 class="text-xs font-bold text-[#94A3B8] uppercase tracking-[0.15em]">Matched
+                                        Competencies</h3>
+                                </div>
+                                <div id="matched-skills-container" class="flex flex-wrap"></div>
+                            </div>
+                            <div class="p-8">
+                                <div class="flex items-center space-x-2 mb-6">
+                                    <div class="w-2 h-2 rounded-full bg-rose-400"></div>
+                                    <h3 class="text-xs font-bold text-[#94A3B8] uppercase tracking-[0.15em]">Missing
+                                        Requirements</h3>
+                                </div>
+                                <div id="missing-skills-container" class="flex flex-wrap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar: Next Steps + Learning Paths -->
+                <div class="space-y-8">
+                    <!-- Next Steps -->
+                    <div class="next-steps-card text-white p-8 rounded-[24px] animate-in delay-5"
+                        style="box-shadow: 0 10px 40px rgba(0,0,0,0.35);">
+                        <h3 class="text-lg font-bold mb-6 flex items-center relative z-10">
+                            <i data-lucide="trending-up" class="mr-2.5" size="20"></i>
+                            Next Steps
+                        </h3>
+                        <ul id="recommendations-list" class="space-y-4 relative z-10"></ul>
+                    </div>
+
+                    <!-- Learning Paths -->
+                    <div id="resources-card" class="hidden glass-card p-8 animate-in delay-6"
+                        style="border-radius:24px;">
+                        <h3 class="text-lg font-bold mb-6 flex items-center text-white">
+                            <i data-lucide="book-open" class="mr-2.5 text-[#22D3EE]" size="20"></i>
+                            Learning Paths
+                        </h3>
+                        <div id="resources-container" class="space-y-3"></div>
+                    </div>
+
+                    <!-- New Analysis Button -->
+                    <button onclick="window.location.reload()"
+                        class="btn-secondary w-full py-4 text-[#94A3B8] font-bold rounded-[10px] focus:outline-none">
+                        Start New Analysis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="footer" class="pt-0 pb-10" style="margin-top: 40px;">
+        <div class="footer-gradient mb-10"></div>
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="glass rounded-[24px] px-8 py-8 md:px-12 md:py-10"
+                style="box-shadow: 0 10px 40px rgba(0,0,0,0.35);">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <!-- Brand -->
+                    <div class="flex flex-col items-center md:items-start gap-2">
+                        <div class="flex items-center space-x-3">
+                            <div class="logo-icon p-2 rounded-xl text-white">
+                                <i data-lucide="brain" size="18"></i>
+                            </div>
+                            <span class="text-white font-bold text-lg">AI Resume <span
+                                    class="gradient-text">Analyzer</span></span>
+                        </div>
+                        <p class="text-[#94A3B8] text-sm leading-relaxed max-w-sm text-center md:text-left">
+                            AI powered platform that analyzes resumes and detects skill gaps for career growth.
+                        </p>
+                        <p class="text-[#475569] text-xs">
+                            &copy; 2026 AI Resume Analyzer.
+                        </p>
+                    </div>
+
+                    <!-- Contact Me -->
+                    <div class="flex flex-col items-center md:items-end gap-3">
+                        <h4 class="text-xs font-bold text-[#E5E7EB] uppercase tracking-[0.15em]">Contact Us</h4>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://github.com/nidafaria" target="_blank" title="Github"
+                                class="social-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"></path></svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/nidafaria/" target="_blank"
+                                title="LinkedIn" class="social-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            </a>
+                            <a href="mailto:nidafaria13@gmail.com" title="Email" class="social-icon">
+                                <i data-lucide="mail" size="20"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
