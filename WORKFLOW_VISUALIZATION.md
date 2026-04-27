@@ -466,35 +466,6 @@ Maria wants to upskill in her current backend role. She discovers:
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! Areas for improvement:
-
-- [ ] Add more job roles and skill definitions
-- [ ] Integrate with real job postings APIs
-- [ ] Add user authentication and profile saving
-- [ ] Implement resume scoring algorithms
-- [ ] Add interview preparation resources
-- [ ] Create mobile app version
-
----
-
-## 📝 License
-
-This project is open source and available under the MIT License.
-
----
-
-## 📧 Support & Questions
-
-For questions or issues:
-1. Check the documentation
-2. Review the FAQ section
-3. Open an issue on GitHub
-4. Contact the development team
-
----
-
 ## 🎯 Future Roadmap
 
 ### Phase 1 (Current)
@@ -526,6 +497,3 @@ For questions or issues:
 
 ---
 
-**Last Updated:** February 2026  
-**Version:** 1.0  
-**Status:** Active Development

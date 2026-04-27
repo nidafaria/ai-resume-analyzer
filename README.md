@@ -133,60 +133,6 @@ Grouped by importance level.
 
 ---
 
-## ▶️ Run Locally
-
-### 🔹 Backend
-
-```bash
-cd ai-resume-analyzer-backend
-py -m venv .venv
-.\.venv\Scripts\activate
-python -m pip install -r requirements.txt
-python app.py   # or uvicorn app:app --reload
-```
-
----
-
-### 🔹 Frontend
-
-```bash
-cd ai_resume_analyzer_frontend
-npm install
-npm run dev
-```
-
-Then open:
-
-```
-http://localhost:5173
-```
-
----
-
-## 📊 API Endpoint
-
-### POST `/analyze`
-
-**Form Data:**
-
-* `resume` → PDF file
-* `role` → target role
-* `include_resources` → true/false
-
-**Response Example:**
-
-```json
-{
-  "match_percentage": 72,
-  "rating": "Good ⭐⭐⭐",
-  "matched_skills": ["Python", "Django"],
-  "missing_skills": ["Docker", "Kubernetes"],
-  "recommendations": ["Learn containerization with Docker"]
-}
-```
-
----
-
 ## 🔮 Future Improvements
 
 * 📊 Skill radar charts
@@ -207,9 +153,19 @@ http://localhost:5173
 
 ---
 
-## 👨‍💻 Author
+## 📊 System Workflow
+
+See detailed workflow: [WORKFLOW_VISUALIZATION.md](./WORKFLOW_VISUALIZATION.md)
+
+---
+
+## 👨‍💻 Authors
 
 **Nida Faria**
+**Shabuir Shahin**
+**Mirudula S**
+**Monisha U**
+
 
 ---
 
