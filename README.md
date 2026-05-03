@@ -162,7 +162,7 @@ See detailed workflow: [WORKFLOW_VISUALIZATION.md](./WORKFLOW_VISUALIZATION.md)
 ## 👨‍💻 Authors
 
 **Nida Faria**  
-**Shabuir Shahin**  
+**Shabuir Shahin A**  
 **Mirudula S**  
 **Monisha U**
 
